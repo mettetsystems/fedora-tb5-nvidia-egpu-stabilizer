@@ -17,4 +17,8 @@ cp -a /etc/modprobe.d/99-egpu-gen3-preload.conf "$OUT/" 2>/dev/null || true
 cp -a /etc/dracut.conf.d/99-egpu-gen3-preload.conf "$OUT/" 2>/dev/null || true
 cp -a /etc/systemd/system/egpu-gen3-preload.service "$OUT/" 2>/dev/null || true
 cp -a /usr/local/sbin/egpu-gen3-kmod-start "$OUT/" 2>/dev/null || true
+cp -a /usr/lib/modprobe.d/99-egpu-gen3-preload.conf "$OUT/" 2>/dev/null || true
+cp -a /usr/lib/dracut/dracut.conf.d/99-egpu-gen3-preload.conf "$OUT/" 2>/dev/null || true
+cp -a /usr/lib/systemd/system/egpu-gen3-preload.service "$OUT/" 2>/dev/null || true
+cp -a /usr/libexec/tb5-egpu-gen3/egpu-gen3-kmod-start "$OUT/" 2>/dev/null || true
 echo "Support bundle: $OUT"

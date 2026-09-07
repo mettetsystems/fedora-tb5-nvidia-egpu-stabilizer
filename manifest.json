@@ -6,5 +6,5 @@
   "validated_nvidia": "610.57.04",
   "validated_gpu": "RTX 5090 10de:2b85",
   "validated_parent": "Intel Barlow Ridge 8086:5786",
-  "next_task": "Convert manually built signed helper into proper akmod packaging"
+  "next_task": "Phase B: rpmbuild only; do not install, dracut, or reboot"
 }

@@ -1,6 +1,10 @@
 [Unit]
 Description=Stabilize RTX 5090 TB5 link before NVIDIA initialization
 After=local-fs.target
+# After= waits for akmods.service to finish if it is started this boot.
+# It does not guarantee tb5_gen3_pre exists for a newly installed kernel.
+# Missing helper must fail closed (script refuses to load NVIDIA).
+After=akmods.service
 Before=display-manager.service
 Before=nvidia-persistenced.service
 Before=nvidia-powerd.service
@@ -8,9 +12,9 @@ Before=nvidia-cdi-refresh.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/sbin/egpu-gen3-kmod-start
+ExecStart=/usr/libexec/tb5-egpu-gen3/egpu-gen3-kmod-start
 RemainAfterExit=yes
-TimeoutStartSec=60
+TimeoutStartSec=90
 
 [Install]
 WantedBy=multi-user.target

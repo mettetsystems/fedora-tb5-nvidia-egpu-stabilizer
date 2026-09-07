@@ -67,4 +67,4 @@ With the workaround:
 
 The working `.ko` was built manually for kernel `7.1.10-200.fc44.x86_64`.
 
-Convert it into a proper Fedora/RPM Fusion-style **akmod** so future kernels rebuild and sign the helper automatically. Start with `CURSOR_MASTER_PROMPT.md`.
+Phase A packaging (specs, install/uninstall scripts, akmod notes) lives in `packaging/rpm/` and `docs/AKMOD_BUILD.md`. Do not install those RPMs until a later phase is approved. Start with `CURSOR_MASTER_PROMPT.md`.
