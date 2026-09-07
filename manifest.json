@@ -1,0 +1,10 @@
+{
+  "project": "tb5-egpu-gen3-handoff",
+  "purpose": "Cursor handoff and akmod conversion scaffold",
+  "validated_os": "Fedora 44",
+  "validated_kernel": "7.1.10-200.fc44.x86_64",
+  "validated_nvidia": "610.57.04",
+  "validated_gpu": "RTX 5090 10de:2b85",
+  "validated_parent": "Intel Barlow Ridge 8086:5786",
+  "next_task": "Convert manually built signed helper into proper akmod packaging"
+}

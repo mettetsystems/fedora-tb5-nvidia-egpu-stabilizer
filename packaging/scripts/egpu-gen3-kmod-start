@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+TAG="egpu-gen3-boot"
+log(){ echo "$TAG: $*"; }
+die(){ log "ERROR: $*"; exit 1; }
+
+GPU="0000:8d:00.0"
+BRIDGE="0000:8c:00.0"
+
+log "waiting for RTX 5090..."
+found=0
+for ((i=0; i<200; i++)); do
+    if [[ -e "/sys/bus/pci/devices/$GPU" && -e "/sys/bus/pci/devices/$BRIDGE" ]]; then
+        found=1
+        break
+    fi
+    sleep 0.1
+done
+(( found == 1 )) || die "RTX 5090 / Barlow Ridge path not present"
+
+if grep -qE '^nvidia ' /proc/modules; then
+    die "NVIDIA loaded before stabilizer"
+fi
+
+log "loading signed Gen3 stabilizer"
+modprobe tb5_gen3_pre
+[[ -e /sys/module/tb5_gen3_pre/parameters/reassert ]] || die "helper did not initialize"
+
+log "pre-NVIDIA Gen3 stabilization succeeded"
+log "loading NVIDIA base module"
+modprobe --ignore-install nvidia
+echo 1 > /sys/module/tb5_gen3_pre/parameters/reassert
+
+log "loading NVIDIA companion modules"
+modprobe --ignore-install nvidia_modeset
+modprobe --ignore-install nvidia_uvm
+modprobe --ignore-install nvidia_drm
+echo 1 > /sys/module/tb5_gen3_pre/parameters/reassert
+
+sleep 1
+nvidia-smi -L
+log "SUCCESS: RTX 5090 initialized through stabilized TB5 path"

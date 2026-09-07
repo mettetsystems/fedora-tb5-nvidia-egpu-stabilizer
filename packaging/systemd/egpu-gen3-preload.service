@@ -1,0 +1,16 @@
+[Unit]
+Description=Stabilize RTX 5090 TB5 link before NVIDIA initialization
+After=local-fs.target
+Before=display-manager.service
+Before=nvidia-persistenced.service
+Before=nvidia-powerd.service
+Before=nvidia-cdi-refresh.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/egpu-gen3-kmod-start
+RemainAfterExit=yes
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target
