@@ -4,7 +4,7 @@
 
 Name:           tb5-egpu-gen3
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Boot orchestration for the RTX 5090 Thunderbolt 5 Gen3 stabilizer
 License:        GPL-2.0-only
 URL:            https://github.com/ojoseph/fedora-tb5-nvidia-egpu-stabilizer
@@ -114,6 +114,9 @@ fi
 %doc README.md SAFETY_INVARIANTS.md TROUBLESHOOTING.md AKMOD_BUILD.md INVESTIGATION_LOG.md
 
 %changelog
+* Mon Sep 07 2026 Local maintainer <local@localhost> - 1.0.0-2
+- Align integration RPM NVR with kmod 1.0.0-2. Scriptlets remain inert.
+
 * Mon Sep 07 2026 Local maintainer <local@localhost> - 1.0.0-1
 - Initial integration packaging: systemd, modprobe blocker, dracut omit, docs.
 - Inert scriptlets: no systemctl preset/enable/disable/start/stop.
